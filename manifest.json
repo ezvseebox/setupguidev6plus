@@ -1,0 +1,20 @@
+{
+  "name": "EZ vSeeBox V6+ Setup Guide",
+  "short_name": "V6+ Setup",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#06000f",
+  "theme_color": "#9333ea",
+  "icons": [
+    {
+      "src": "https://ezvseebox.github.io/channelguide/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://ezvseebox.github.io/channelguide/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
