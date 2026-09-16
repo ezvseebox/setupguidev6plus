@@ -1,10 +1,8 @@
-const CACHE = 'vsb-setupguide-v1';
-const ASSETS = ['./'];
+const CACHE = 'vsb-setupguide-v2';
+const FILES = ['./'];
 
 self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(ASSETS))
-  );
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
   self.skipWaiting();
 });
 
@@ -17,8 +15,13 @@ self.addEventListener('activate', e => {
   self.clients.claim();
 });
 
+// Network-first: always try network, fall back to cache only if offline
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+    fetch(e.request).then(res => {
+      const clone = res.clone();
+      caches.open(CACHE).then(c => c.put(e.request, clone));
+      return res;
+    }).catch(() => caches.match(e.request))
   );
 });
